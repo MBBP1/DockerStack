@@ -138,7 +138,7 @@ docker compose up --build -d
 | phpMyAdmin     | `https://localhost:50718/phpmyadmin`  | PMA_HOST = mariadb           |
 | Grafana        | `https://localhost:50718/grafana`     | User/pass from `.env`        |
 | Prometheus     | `https://localhost:50718/prometheus`  |                              |
-| Webserver      | `http://localhost:50891/data-rpi`     | HTML from `html/` dir        |
+| Webserver      | `https://localhost:50891/data-rpi`    | HTML from `html/` dir        |
 
 ## 6. Stopping the Stack
 
