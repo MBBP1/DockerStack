@@ -133,12 +133,12 @@ docker compose up --build -d
 
 ## 5. Accessing Services
 
-| Service        | URL                              | Info                         |
-|----------------|----------------------------------|------------------------------|
-| phpMyAdmin     | `https://<IP>:50718/phpmyadmin`  | PMA_HOST = mariadb           |
-| Grafana        | `https://<IP>:50718/grafana`     | User/pass from `.env`        |
-| Prometheus     | `https://<IP>:50718/prometheus`  |                              |
-| Webserver      | `http://<IP>:50891/data-rpi`     | HTML from `html/` dir        |
+| Service        | URL                                   | Info                         |
+|----------------|---------------------------------------|------------------------------|
+| phpMyAdmin     | `https://localhost:50718/phpmyadmin`  | PMA_HOST = mariadb           |
+| Grafana        | `https://localhost:50718/grafana`     | User/pass from `.env`        |
+| Prometheus     | `https://localhost:50718/prometheus`  |                              |
+| Webserver      | `http://localhost:50891/data-rpi`     | HTML from `html/` dir        |
 
 ## 6. Stopping the Stack
 
