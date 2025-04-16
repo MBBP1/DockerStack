@@ -42,7 +42,7 @@ This repository sets up a full Docker-based development and monitoring stack tha
 1. **Clone project**:
 
 ```bash
-git clone https://github.com/MBBP1/Docker-Dev-Stack.git
+git clone https://github.com/MBBP1/DockerStack.git
 cd Docker-Dev-Stac
 ```
 
