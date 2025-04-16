@@ -1,0 +1,100 @@
+#--------------------------------------------------------------------------------------
+services:
+  mariadb:
+    image: mariadb:10.5
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      - PMA_HOST=mariadb
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - PMA_ABSOLUTE_URI=${PMA_ABSOLUTE_URI}
+    expose:
+      - "80"
+    networks:
+      - mynetwork
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: always
+    expose:
+      - "9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--web.route-prefix=/prometheus'
+      - '--web.external-url=${PROMETHEUS_EXTERNAL_URL}'
+    networks:
+      - mynetwork
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    expose:
+      - "3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+      - GF_SERVER_ROOT_URL=${GRAFANA_ROOT_URL}
+    networks:
+      - mynetwork
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - "${NGINX_EXTERNAL_PORT}:50000"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      - phpmyadmin
+      - grafana
+      - prometheus
+    networks:
+      - mynetwork
+
+  webserver:
+    build: .
+    container_name: webserver
+    restart: always
+    volumes:
+      - ./html:/var/www/html
+      - ./apache-custom.conf:/etc/apache2/conf-enabled/data-rpi.conf
+    environment:
+      - MYSQL_HOST_2=${MYSQL_HOST_2}
+      - MYSQL_USER_2=${MYSQL_USER_2}
+      - MYSQL_PASSWORD_2=${MYSQL_PASSWORD_2}
+      - MYSQL_DATABASE_2=${MYSQL_DATABASE_2}
+    ports:
+      - "${WEBSERVER_EXTERNAL_PORT}:80"
+    networks:
+      - mynetwork
+
+volumes:
+  mariadb_data:
+  grafana-storage:
+
+networks:
+  mynetwork:
+    driver: bridge

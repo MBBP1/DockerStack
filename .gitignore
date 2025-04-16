@@ -1,0 +1,10 @@
+/.env
+
+/certs/
+
+html/data-rpi/images/
+html/data-rpi/temperature-data.csv
+html/data-rpi/temperature_data.csv
+html/data-rpi/temperature_data.txt
+
+/html/pi-stream.html

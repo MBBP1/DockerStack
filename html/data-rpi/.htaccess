@@ -1,0 +1,2 @@
+HeaderName .header
+Redirect /test http://www.example.com
