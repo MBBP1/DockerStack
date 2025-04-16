@@ -57,19 +57,19 @@ MYSQL_USER=your_user
 MYSQL_PASSWORD=your_password
 MYSQL_DATABASE=your_database
 
-# Change <IP> -> Server IP, without <>
+# Change localhost -> Server IP, without <>
 # Change: 50718 -> Your open port
 # Change: 50891 -> Your 2nd open port
 # phpMyAdmin
-PMA_ABSOLUTE_URI=https://<IP>:50718/phpmyadmin/
+PMA_ABSOLUTE_URI=https://localhost:50718/phpmyadmin/
 
 # Grafana
 GF_SECURITY_ADMIN_USER=admin
 GF_SECURITY_ADMIN_PASSWORD=admin
-GRAFANA_ROOT_URL=https://<IP>:50718/grafana/
+GRAFANA_ROOT_URL=https://localhost:50718/grafana/
 
 # Prometheus
-PROMETHEUS_EXTERNAL_URL=https://<IP>:50718/prometheus/
+PROMETHEUS_EXTERNAL_URL=https://localhost:50718/prometheus/
 
 GF_SECURITY_ADMIN_USER=admin
 GF_SECURITY_ADMIN_PASSWORD=your_admin_password
