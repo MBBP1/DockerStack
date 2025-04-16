@@ -43,7 +43,7 @@ This repository sets up a full Docker-based development and monitoring stack tha
 
 ```bash
 git clone https://github.com/MBBP1/DockerStack.git
-cd Docker-Dev-Stac
+cd DockerStack
 ```
 
 ## 2. Environment Variables
